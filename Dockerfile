@@ -4,6 +4,7 @@ COPY package.json ./
 COPY bun.lockb ./
 COPY src ./src
 COPY sing-box ./sing-box
+COPY .env.local ./.env.local
 
 EXPOSE 3000
 
