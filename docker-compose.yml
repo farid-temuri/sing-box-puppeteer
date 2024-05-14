@@ -1,15 +1,15 @@
-version: "3.8"
+version: '3.8'
 services:
   service:
     build: .
     ports:
-      - "3000:3000"
+      - '3000:3000'
   sing-box:
     image: ghcr.io/sagernet/sing-box
     container_name: sing-box
     restart: always
     ports:
-      - "443:443"
+      - '443:443'
     volumes:
       - ./sing-box:/etc/sing-box/
     command: -D /var/lib/sing-box -C /etc/sing-box/ run

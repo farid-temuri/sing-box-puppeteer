@@ -1,20 +1,27 @@
 {
   "name": "sing-box-puppeteer",
-  "module": "index.ts",
   "type": "module",
-  "devDependencies": {
-    "bun-types": "latest"
-  },
+  "module": "index.ts",
   "scripts": {
     "dev": "bun --watch src/index.ts",
     "build": "bun build src/index.ts",
     "start": "NODE_ENV=production bun src/index.ts",
-    "test": "bun test"
+    "lint": "eslint .",
+    "lint:fix": "eslint . --fix"
   },
   "peerDependencies": {
     "typescript": "^5.0.0"
   },
   "dependencies": {
-    "elysia": "^1.0.17"
+    "elysia": "^1.0.17",
+    "typescript": "^5.4.5"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^2.18.0",
+    "@unocss/eslint-plugin": "^0.60.2",
+    "bun-types": "latest",
+    "eslint": "8.56.0",
+    "eslint-plugin-format": "^0.1.1",
+    "oxlint": "^0.3.4"
   }
 }
