@@ -5,7 +5,7 @@ import type { User } from './config-service/shadowSocks22'
 import { getLink } from './utils'
 import { configRepository } from './repository'
 
-const port = 3000
+const port = process.env.PORT || 3000
 
 new Elysia()
   .onRequest((ctx) => {
