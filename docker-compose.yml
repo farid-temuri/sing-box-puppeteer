@@ -1,9 +1,5 @@
 version: '3.8'
 services:
-  service:
-    build: .
-    ports:
-      - '3000:3000'
   sing-box:
     image: ghcr.io/sagernet/sing-box
     container_name: sing-box
