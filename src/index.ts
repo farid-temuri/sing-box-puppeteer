@@ -1,17 +1,21 @@
 import { Elysia } from 'elysia'
+import { $ } from 'bun'
 import { getCurrentUsersAndPass, saveUsersAndPassOfSock } from './config-service'
 import type { User } from './config-service/shadowSocks22'
-import { createRandB64String, getLink } from './utils'
-
-const DEFAULT_NAME = 'xor_vpn_netherlands'
+import { getLink } from './utils'
+import { configRepository } from './repository'
 
 const port = 3000
 
 new Elysia()
   .onRequest((ctx) => {
-    const parsedUrl = new URL(ctx.request.url)
-    if (parsedUrl.searchParams.get('asd') !== process.env.SECRET)
-      return 'охладите трахание'
+    if (!process.env.SECRET_QUERY)
+      return
+
+    const parsedKey = new URL(ctx.request.url).searchParams.get(process.env.SECRET_QUERY)
+
+    if (parsedKey !== process.env.SECRET_VALUE)
+      return 'chill'
   })
   .get('/users/', async () => {
     const { users, shadowSockConfig } = await getCurrentUsersAndPass()
@@ -24,22 +28,10 @@ new Elysia()
     })
   })
   .post('/users/new', async () => {
-    const { password, users } = await getCurrentUsersAndPass()
-
-    const newUser: User = {
-      name: DEFAULT_NAME,
-      password: createRandB64String(),
-    }
-
-    users.push(newUser)
-
-    saveUsersAndPassOfSock(password, users)
-
-    return newUser
+    return await configRepository.create()
   })
   .get('/main-pass/', async () => {
-    const { password } = await getCurrentUsersAndPass()
-    return password
+    return (await getCurrentUsersAndPass()).password
   })
   .listen(port)
 
