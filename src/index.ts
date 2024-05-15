@@ -8,6 +8,11 @@ const DEFAULT_NAME = 'xor_vpn_netherlands'
 const port = 3000
 
 new Elysia()
+  .onRequest((ctx) => {
+    const parsedUrl = new URL(ctx.request.url)
+    if (parsedUrl.searchParams.get('asd') !== process.env.SECRET)
+      return 'охладите трахание'
+  })
   .get('/users/', async () => {
     const { users, shadowSockConfig } = await getCurrentUsersAndPass()
 

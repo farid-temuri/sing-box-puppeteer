@@ -29,7 +29,7 @@ export function getLink(user: User, shadowSockConfig: ConfigInboundSetting | nul
   const method = shadowSockConfig?.method
   const pass = shadowSockConfig?.password
   const port = shadowSockConfig?.listen_port
-  const server = process.env.SERVER
+  const server = process.env.HOST_NAME
 
   return `ss://${btoa(`${method}:${pass}:${user.password}`)}@${server}:${port}#${user.name}`
 }
