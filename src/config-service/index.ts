@@ -35,5 +35,13 @@ export async function getCurrentUsersAndPass(): Promise<{
 export function saveUsersAndPassOfSock(password: string | null, users: User[]) {
   const localPass = password || createRandB64String()
   const config = defaultShadowSockParams(localPass, users)
-  saveConfig({ inbounds: [config] })
+  saveConfig({
+    inbounds: [config],
+    log: {
+      disabled: false,
+      level: 'trace',
+      output: 'box.log',
+      timestamp: true,
+    },
+  })
 }
