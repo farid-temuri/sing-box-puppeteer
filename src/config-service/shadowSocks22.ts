@@ -1,9 +1,10 @@
-function defaultShadowSockSettings() {
+function defaultShadowSockSettings(): Omit<ConfigInboundSetting, 'password' | 'users'> {
   return {
     type: 'shadowsocks',
     listen: '::',
     listen_port: 443,
     network: 'tcp',
+    tcp_fast_open: true,
     method: '2022-blake3-aes-128-gcm',
   }
 }
@@ -19,6 +20,7 @@ export interface ConfigInboundSetting {
   listen_port: number
   network: string
   method: string
+  tcp_fast_open: boolean
   password: string
   users: User[]
 }
